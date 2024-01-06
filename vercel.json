@@ -1,5 +1,4 @@
 {
-  "regions": ["sin1"]
   "cleanUrls": true,
   "trailingSlash": false,
   "headers": [
@@ -93,4 +92,7 @@
     "silent": true,
     "autoJobCancelation": true
   }
+  "regions": [
+    "sin1"
+  ]
 }
