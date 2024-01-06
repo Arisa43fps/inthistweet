@@ -93,3 +93,7 @@
     "autoJobCancelation": true
   }
 }
+
+{
+  "regions": ["sin1"]
+}
