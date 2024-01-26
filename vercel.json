@@ -91,7 +91,7 @@
   "github": {
     "silent": true,
     "autoJobCancelation": true
-  }
+  },
   "regions": [
     "sin1"
   ]
