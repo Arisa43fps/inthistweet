@@ -1,6 +1,6 @@
 // Based on `react-tweet` (https://github.com/vercel/react-tweet) and `download-twitter-video` (https://github.com/egoist/download-twitter-video)
-import type { ImageValue, TwitterCard, UnifiedCardData } from '../types/card';
-import type { Tweet, MediaDetails, TweetParent, QuotedTweet, MediaEntity } from '../types/index';
+import type { ImageValue, TwitterCard, UnifiedCardData } from '../types/card.ts';
+import type { Tweet, MediaDetails, TweetParent, QuotedTweet, CardMediaEntity } from '../types/index.ts';
 import "urlpattern-polyfill"
 
 export const EMBED_API_URL = "https://cdn.syndication.twimg.com";
@@ -207,7 +207,7 @@ const extractCardMedia = (card: TwitterCard) => {
           if (component.type === "media" && component.data && component.data.id) {
             // Finding the media details using the media ID in the component data
             const mediaId = component.data.id;
-            const media = mediaEntities[mediaId] as unknown as (MediaDetails & MediaEntity);
+            const media = mediaEntities[mediaId] as unknown as (MediaDetails & CardMediaEntity);
             if (media) {
               additionalItems.push({
                 type: media.type,
@@ -310,6 +310,8 @@ export async function fetchEmbeddedTweet(url: string) {
     const id = exec.pathname.groups.id;
     const url = new URL(`${EMBED_API_URL}/tweet-result`)
 
+    // https://cdn.syndication.twimg.com/tweet-result?features=tfw_timeline_list:;tfw_follower_count_sunset:true;tfw_tweet_edit_backend:on;tfw_refsrc_session:on;tfw_fosnr_soft_interventions_enabled:on;tfw_mixed_media_15897:treatment;tfw_experiments_cookie_expiration:1209600;tfw_show_birdwatch_pivots_enabled:on;tfw_duplicate_scribes_to_settings:on;tfw_use_profile_image_shape_enabled:on;tfw_video_hls_dynamic_manifests_15082:true_bitrate;tfw_legacy_timeline_sunset:true;tfw_tweet_edit_frontend:on&id=1754889044423741926&lang=en&token=49559whuarh&ovdffi=l78enholvprp&oreqaz=tlkb0e85f7bc&yb0xad=1fu83tf85hizn&3prkjy=16jgl8eyj9k5e&qr0fey=f8d8rnms2ae&nsosme=f8phiqfk7hr5&mwu396=17vqt618zs5d
+
     url.searchParams.set('id', id!)
     url.searchParams.set('lang', 'en')
     url.searchParams.set('token', '5')
@@ -320,6 +322,13 @@ export async function fetchEmbeddedTweet(url: string) {
         'tfw_follower_count_sunset:true',
         'tfw_tweet_edit_backend:on',
         'tfw_refsrc_session:on',
+        'tfw_fosnr_soft_interventions_enabled:on',
+        'tfw_mixed_media_15897:treatment',
+        'tfw_experiments_cookie_expiration:1209600',
+        'tfw_show_birdwatch_pivots_enabled:on',
+        'tfw_use_profile_image_shape_enabled:on',
+        'tfw_video_hls_dynamic_manifests_15082:true_bitrate',
+        
         'tfw_show_business_verified_badge:on',
         'tfw_duplicate_scribes_to_settings:on',
         'tfw_show_blue_verified_badge:on',
